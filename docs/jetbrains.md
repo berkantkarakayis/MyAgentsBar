@@ -65,6 +65,6 @@ JetBrains AI is a local-only provider. We read quota information directly from t
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/JetBrains/JetBrainsStatusProbe.swift`
-- `Sources/CodexBarCore/Providers/JetBrains/JetBrainsIDEDetector.swift`
-- `Sources/CodexBar/Providers/JetBrains/JetBrainsProviderImplementation.swift`
+- `Sources/MyAgentsBarCore/Providers/JetBrains/JetBrainsStatusProbe.swift`
+- `Sources/MyAgentsBarCore/Providers/JetBrains/JetBrainsIDEDetector.swift`
+- `Sources/MyAgentsBar/Providers/JetBrains/JetBrainsProviderImplementation.swift`

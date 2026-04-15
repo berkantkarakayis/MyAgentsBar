@@ -12,7 +12,7 @@ let sweetCookieKitDependency: Package.Dependency =
     : .package(url: "https://github.com/steipete/SweetCookieKit", from: "0.4.0")
 
 let package = Package(
-    name: "CodexBar",
+    name: "MyAgentsBar",
     platforms: [
         .macOS(.v14),
     ],
@@ -27,9 +27,9 @@ let package = Package(
     targets: {
         var targets: [Target] = [
             .target(
-                name: "CodexBarCore",
+                name: "MyAgentsBarCore",
                 dependencies: [
-                    "CodexBarMacroSupport",
+                    "MyAgentsBarMacroSupport",
                     .product(name: "Logging", package: "swift-log"),
                     .product(name: "SweetCookieKit", package: "SweetCookieKit"),
                 ],
@@ -37,30 +37,30 @@ let package = Package(
                     .enableUpcomingFeature("StrictConcurrency"),
                 ]),
             .macro(
-                name: "CodexBarMacros",
+                name: "MyAgentsBarMacros",
                 dependencies: [
                     .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
                     .product(name: "SwiftSyntaxBuilder", package: "swift-syntax"),
                     .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 ]),
             .target(
-                name: "CodexBarMacroSupport",
+                name: "MyAgentsBarMacroSupport",
                 dependencies: [
-                    "CodexBarMacros",
+                    "MyAgentsBarMacros",
                 ]),
             .executableTarget(
-                name: "CodexBarCLI",
+                name: "MyAgentsBarCLI",
                 dependencies: [
-                    "CodexBarCore",
+                    "MyAgentsBarCore",
                     .product(name: "Commander", package: "Commander"),
                 ],
-                path: "Sources/CodexBarCLI",
+                path: "Sources/MyAgentsBarCLI",
                 swiftSettings: [
                     .enableUpcomingFeature("StrictConcurrency"),
                 ]),
             .testTarget(
-                name: "CodexBarLinuxTests",
-                dependencies: ["CodexBarCore", "CodexBarCLI"],
+                name: "MyAgentsBarLinuxTests",
+                dependencies: ["MyAgentsBarCore", "MyAgentsBarCLI"],
                 path: "TestsLinux",
                 swiftSettings: [
                     .enableUpcomingFeature("StrictConcurrency"),
@@ -71,21 +71,21 @@ let package = Package(
         #if os(macOS)
         targets.append(contentsOf: [
             .executableTarget(
-                name: "CodexBarClaudeWatchdog",
+                name: "MyAgentsBarClaudeWatchdog",
                 dependencies: [],
-                path: "Sources/CodexBarClaudeWatchdog",
+                path: "Sources/MyAgentsBarClaudeWatchdog",
                 swiftSettings: [
                     .enableUpcomingFeature("StrictConcurrency"),
                 ]),
             .executableTarget(
-                name: "CodexBar",
+                name: "MyAgentsBar",
                 dependencies: [
                     .product(name: "Sparkle", package: "Sparkle"),
                     .product(name: "KeyboardShortcuts", package: "KeyboardShortcuts"),
-                    "CodexBarMacroSupport",
-                    "CodexBarCore",
+                    "MyAgentsBarMacroSupport",
+                    "MyAgentsBarCore",
                 ],
-                path: "Sources/CodexBar",
+                path: "Sources/MyAgentsBar",
                 resources: [
                     .process("Resources"),
                 ],
@@ -95,27 +95,27 @@ let package = Package(
                     .define("ENABLE_SPARKLE"),
                 ]),
             .executableTarget(
-                name: "CodexBarWidget",
-                dependencies: ["CodexBarCore"],
-                path: "Sources/CodexBarWidget",
+                name: "MyAgentsBarWidget",
+                dependencies: ["MyAgentsBarCore"],
+                path: "Sources/MyAgentsBarWidget",
                 swiftSettings: [
                     .enableUpcomingFeature("StrictConcurrency"),
                 ]),
             .executableTarget(
-                name: "CodexBarClaudeWebProbe",
-                dependencies: ["CodexBarCore"],
-                path: "Sources/CodexBarClaudeWebProbe",
+                name: "MyAgentsBarClaudeWebProbe",
+                dependencies: ["MyAgentsBarCore"],
+                path: "Sources/MyAgentsBarClaudeWebProbe",
                 swiftSettings: [
                     .enableUpcomingFeature("StrictConcurrency"),
                 ]),
         ])
 
         targets.append(.testTarget(
-            name: "CodexBarTests",
-            dependencies: ["CodexBar", "CodexBarCore", "CodexBarCLI", "CodexBarWidget"],
+            name: "MyAgentsBarTests",
+            dependencies: ["MyAgentsBar", "MyAgentsBarCore", "MyAgentsBarCLI", "MyAgentsBarWidget"],
             path: "Tests",
             resources: [
-                .copy("CodexBarTests/Fixtures"),
+                .copy("MyAgentsBarTests/Fixtures"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),

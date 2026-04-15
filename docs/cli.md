@@ -1,45 +1,45 @@
 ---
-summary: "CodexBar CLI for fetching usage from the command line."
+summary: "MyAgentsBar CLI for fetching usage from the command line."
 read_when:
-  - "You want to call CodexBar data from scripts or a terminal."
+  - "You want to call MyAgentsBar data from scripts or a terminal."
   - "Adding or modifying Commander-based CLI commands."
   - "Aligning menubar and CLI output/behavior."
 ---
 
-# CodexBar CLI
+# MyAgentsBar CLI
 
 A lightweight Commander-based CLI that mirrors the menubar app’s data paths (Codex web/RPC → PTY fallback; Claude web by default with CLI fallback and OAuth debug).
 Use it when you need usage numbers in scripts, CI, or dashboards without UI.
 
 ## Install
-- In the app: **Preferences → Advanced → Install CLI**. This symlinks `CodexBarCLI` to `/usr/local/bin/codexbar` and `/opt/homebrew/bin/codexbar`.
-- From the repo: `./bin/install-codexbar-cli.sh` (same symlink targets).
-- Manual: `ln -sf "/Applications/CodexBar.app/Contents/Helpers/CodexBarCLI" /usr/local/bin/codexbar`.
+- In the app: **Preferences → Advanced → Install CLI**. This symlinks `MyAgentsBarCLI` to `/usr/local/bin/myagentsbar` and `/opt/homebrew/bin/myagentsbar`.
+- From the repo: `./bin/install-myagentsbar-cli.sh` (same symlink targets).
+- Manual: `ln -sf "/Applications/MyAgentsBar.app/Contents/Helpers/MyAgentsBarCLI" /usr/local/bin/myagentsbar`.
 
 ### Linux install
-- Homebrew (Linuxbrew, Linux only): `brew install steipete/tap/codexbar`.
-- Download `CodexBarCLI-v<tag>-linux-<arch>.tar.gz` from GitHub Releases (x86_64 + aarch64).
-- Extract; run `./codexbar` (symlink) or `./CodexBarCLI`.
+- Homebrew (Linuxbrew, Linux only): `brew install steipete/tap/myagentsbar`.
+- Download `MyAgentsBarCLI-v<tag>-linux-<arch>.tar.gz` from GitHub Releases (x86_64 + aarch64).
+- Extract; run `./myagentsbar` (symlink) or `./MyAgentsBarCLI`.
 
 ```
-tar -xzf CodexBarCLI-v0.17.0-linux-x86_64.tar.gz
-./codexbar --version
-./codexbar usage --format json --pretty
+tar -xzf MyAgentsBarCLI-v0.17.0-linux-x86_64.tar.gz
+./myagentsbar --version
+./myagentsbar usage --format json --pretty
 ```
 
 ## Build
-- `./Scripts/package_app.sh` (or `./Scripts/compile_and_run.sh`) bundles `CodexBarCLI` into `CodexBar.app/Contents/Helpers/CodexBarCLI`.
-- Standalone: `swift build -c release --product CodexBarCLI` (binary at `./.build/release/CodexBarCLI`).
+- `./Scripts/package_app.sh` (or `./Scripts/compile_and_run.sh`) bundles `MyAgentsBarCLI` into `MyAgentsBar.app/Contents/Helpers/MyAgentsBarCLI`.
+- Standalone: `swift build -c release --product MyAgentsBarCLI` (binary at `./.build/release/MyAgentsBarCLI`).
 - Dependencies: Swift 6.2+, Commander package (`https://github.com/steipete/Commander`).
 
 ## Configuration
-CodexBar reads `~/.codexbar/config.json` for provider settings, secrets, and ordering.
+MyAgentsBar reads `~/.myagentsbar/config.json` for provider settings, secrets, and ordering.
 See `docs/configuration.md` for the schema.
 
 ## Command
-- `codexbar` defaults to the `usage` command.
+- `myagentsbar` defaults to the `usage` command.
   - `--format text|json` (default: text).
-- `codexbar cost` prints local token cost usage (Claude + Codex) without web/CLI access.
+- `myagentsbar cost` prints local token cost usage (Claude + Codex) without web/CLI access.
   - `--format text|json` (default: text).
   - `--refresh` ignores cached scans.
 - `--provider <id|both|all>` (default: enabled providers in config; falls back to defaults when missing).
@@ -65,13 +65,13 @@ See `docs/configuration.md` for the schema.
 - Global flags: `-h/--help`, `-V/--version`, `-v/--verbose`, `--no-color`, `--log-level <trace|verbose|debug|info|warning|error|critical>`, `--json-output`, `--json-only`.
   - `--json-output`: JSONL logs on stderr (machine-readable).
   - `--json-only`: suppress non-JSON output; errors become JSON payloads.
-- `codexbar config validate` checks `~/.codexbar/config.json` for invalid fields.
+- `myagentsbar config validate` checks `~/.myagentsbar/config.json` for invalid fields.
   - `--format text|json`, `--pretty`, and `--json-only` are supported.
   - Warnings keep exit code 0; errors exit non-zero.
-- `codexbar config dump` prints the normalized config JSON.
+- `myagentsbar config dump` prints the normalized config JSON.
 
 ### Token accounts
-The CLI reads multi-account tokens from `~/.codexbar/config.json` (same file as the app).
+The CLI reads multi-account tokens from `~/.myagentsbar/config.json` (same file as the app).
 - Select a specific account: `--account <label>` (matches the label/email in the file).
 - Select by index (1-based): `--account-index <n>`.
 - Fetch all accounts for the provider: `--all-accounts`.
@@ -80,7 +80,7 @@ For Claude, token accounts accept either `sessionKey` cookies or OAuth access to
 OAuth usage requires the `user:profile` scope; inference-only tokens will return an error.
 
 ### Cost JSON payload
-`codexbar cost --format json` emits an array of payloads (one per provider).
+`myagentsbar cost --format json` emits an array of payloads (one per provider).
 - `provider`, `source`, `updatedAt`
 - `sessionTokens`, `sessionCostUSD`
 - `last30DaysTokens`, `last30DaysCostUSD`
@@ -89,23 +89,23 @@ OAuth usage requires the `user:profile` scope; inference-only tokens will return
 
 ## Example usage
 ```
-codexbar                          # text, respects app toggles
-codexbar --provider claude        # force Claude
-codexbar --provider all           # query all providers (honors your logins/toggles)
-codexbar --format json --pretty   # machine output
-codexbar --format json --provider both
-codexbar cost                     # local cost usage (last 30 days + today)
-codexbar cost --provider claude --format json --pretty
-COPILOT_API_TOKEN=... codexbar --provider copilot --format json --pretty
-codexbar --status                 # include status page indicator/description
-codexbar --provider codex --source web --format json --pretty
-codexbar --provider claude --account steipete@gmail.com
-codexbar --provider claude --all-accounts --format json --pretty
-codexbar --json-only --format json --pretty
-codexbar --provider gemini --source api --format json --pretty
-KILO_API_KEY=... codexbar --provider kilo --source api --format json --pretty
-codexbar config validate --format json --pretty
-codexbar config dump --pretty
+myagentsbar                          # text, respects app toggles
+myagentsbar --provider claude        # force Claude
+myagentsbar --provider all           # query all providers (honors your logins/toggles)
+myagentsbar --format json --pretty   # machine output
+myagentsbar --format json --provider both
+myagentsbar cost                     # local cost usage (last 30 days + today)
+myagentsbar cost --provider claude --format json --pretty
+COPILOT_API_TOKEN=... myagentsbar --provider copilot --format json --pretty
+myagentsbar --status                 # include status page indicator/description
+myagentsbar --provider codex --source web --format json --pretty
+myagentsbar --provider claude --account steipete@gmail.com
+myagentsbar --provider claude --all-accounts --format json --pretty
+myagentsbar --json-only --format json --pretty
+myagentsbar --provider gemini --source api --format json --pretty
+KILO_API_KEY=... myagentsbar --provider kilo --source api --format json --pretty
+myagentsbar config validate --format json --pretty
+myagentsbar config dump --pretty
 ```
 
 ### Sample output (text)
@@ -194,7 +194,7 @@ Note: Using CLI fallback
 - Kilo text output splits identity into `Plan:` and `Activity:` lines; in `--source auto`, resolved CLI fetches add
   `Note: Using CLI fallback`.
 - Kilo auto-mode failures include a fallback-attempt summary line in text mode (API attempt then CLI attempt).
-- OpenAI web requires a signed-in `chatgpt.com` session in Safari, Chrome, or Firefox. No passwords are stored; CodexBar reuses cookies.
-- Safari cookie import may require granting CodexBar Full Disk Access (System Settings → Privacy & Security → Full Disk Access).
+- OpenAI web requires a signed-in `chatgpt.com` session in Safari, Chrome, or Firefox. No passwords are stored; MyAgentsBar reuses cookies.
+- Safari cookie import may require granting MyAgentsBar Full Disk Access (System Settings → Privacy & Security → Full Disk Access).
 - The `openaiDashboard` JSON field is normally sourced from the app’s cached dashboard snapshot; `--source auto|web` refreshes it live via WebKit using a per-account cookie store.
 - Future: optional `--from-cache` flag to read the menubar app’s persisted snapshot (if/when that file lands).

@@ -49,7 +49,7 @@ Usage source picker:
   3) Firefox: `~/Library/Application Support/Firefox/Profiles/*/cookies.sqlite`
   - Domains loaded: `chatgpt.com`, `openai.com`.
   - No cookie-name filter; we import all matching domain cookies.
-- Cached cookies: Keychain cache `com.steipete.codexbar.cache` (account `cookie.codex`, source + timestamp).
+- Cached cookies: Keychain cache `com.steipete.myagentsbar.cache` (account `cookie.codex`, source + timestamp).
   Reused before re-importing from browsers.
 - Manual cookie header:
   - Paste the `Cookie:` header from a `chatgpt.com` request in Preferences → Providers → Codex.
@@ -114,15 +114,15 @@ Usage source picker:
   - pi assistant usage is bucketed by assistant-turn timestamp, so mixed-model pi sessions can contribute to multiple
     days/models correctly.
 - Cache:
-  - Native + merged provider cache: `~/Library/Caches/CodexBar/cost-usage/codex-v2.json`
-  - pi session cache: `~/Library/Caches/CodexBar/cost-usage/pi-sessions-v1.json`
+  - Native + merged provider cache: `~/Library/Caches/MyAgentsBar/cost-usage/codex-v2.json`
+  - pi session cache: `~/Library/Caches/MyAgentsBar/cost-usage/pi-sessions-v1.json`
 - Window: last 30 days (rolling), with a 60s minimum refresh interval.
 
 ## Key files
-- Web: `Sources/CodexBarCore/OpenAIWeb/*`
-- CLI RPC + PTY: `Sources/CodexBarCore/UsageFetcher.swift`,
-  `Sources/CodexBarCore/Providers/Codex/CodexStatusProbe.swift`
-- Cost usage: `Sources/CodexBarCore/CostUsageFetcher.swift`,
-  `Sources/CodexBarCore/PiSessionCostScanner.swift`,
-  `Sources/CodexBarCore/PiSessionCostCache.swift`,
-  `Sources/CodexBarCore/Vendored/CostUsage/*`
+- Web: `Sources/MyAgentsBarCore/OpenAIWeb/*`
+- CLI RPC + PTY: `Sources/MyAgentsBarCore/UsageFetcher.swift`,
+  `Sources/MyAgentsBarCore/Providers/Codex/CodexStatusProbe.swift`
+- Cost usage: `Sources/MyAgentsBarCore/CostUsageFetcher.swift`,
+  `Sources/MyAgentsBarCore/PiSessionCostScanner.swift`,
+  `Sources/MyAgentsBarCore/PiSessionCostCache.swift`,
+  `Sources/MyAgentsBarCore/Vendored/CostUsage/*`

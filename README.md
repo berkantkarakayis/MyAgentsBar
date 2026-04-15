@@ -1,8 +1,8 @@
-# CodexBar 🎚️ - May your tokens never run out.
+# MyAgentsBar 🎚️ - May your tokens never run out.
 
 Tiny macOS 14+ menu bar app that keeps your Codex, Claude, Cursor, Gemini, Antigravity, Droid (Factory), Copilot, z.ai, Kiro, Vertex AI, Augment, Amp, JetBrains AI, OpenRouter, and Perplexity limits visible (session + weekly where available) and shows when each window resets. One status item per provider (or Merge Icons mode with a provider switcher and optional Overview tab); enable what you use from Settings. No Dock icon, minimal UI, dynamic bar icons in the menu bar.
 
-<img src="codexbar.png" alt="CodexBar menu screenshot" width="520" />
+<img src="myagentsbar.png" alt="MyAgentsBar menu screenshot" width="520" />
 
 ## Install
 
@@ -10,19 +10,19 @@ Tiny macOS 14+ menu bar app that keeps your Codex, Claude, Cursor, Gemini, Antig
 - macOS 14+ (Sonoma)
 
 ### GitHub Releases
-Download: <https://github.com/steipete/CodexBar/releases>
+Download: <https://github.com/steipete/MyAgentsBar/releases>
 
 ### Homebrew
 ```bash
-brew install --cask steipete/tap/codexbar
+brew install --cask steipete/tap/myagentsbar
 ```
 
 ### Linux (CLI only)
 ```bash
-brew install steipete/tap/codexbar
+brew install steipete/tap/myagentsbar
 ```
-Or download `CodexBarCLI-v<tag>-linux-<arch>.tar.gz` from GitHub Releases.
-Linux support via Omarchy: community Waybar module and TUI, driven by the `codexbar` executable.
+Or download `MyAgentsBarCLI-v<tag>-linux-<arch>.tar.gz` from GitHub Releases.
+Linux support via Omarchy: community Waybar module and TUI, driven by the `myagentsbar` executable.
 
 ### First run
 - Open Settings → Providers and enable what you use.
@@ -63,12 +63,12 @@ The menu bar icon is a tiny two-bar meter:
 - Provider status polling with incident badges in the menu and icon overlay.
 - Merge Icons mode to combine providers into one status item + switcher, with an optional Overview tab for up to three providers.
 - Refresh cadence presets (manual, 1m, 2m, 5m, 15m).
-- Bundled CLI (`codexbar`) for scripts and CI (including `codexbar cost --provider codex|claude` for local cost usage); Linux CLI builds available.
+- Bundled CLI (`myagentsbar`) for scripts and CI (including `myagentsbar cost --provider codex|claude` for local cost usage); Linux CLI builds available.
 - WidgetKit widget mirrors the menu card snapshot.
 - Privacy-first: on-device parsing by default; browser cookies are opt-in and reused (no passwords stored).
 
 ## Privacy note
-Wondering if CodexBar scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, local JSONL logs) when the related features are enabled. See the discussion and audit notes in [issue #12](https://github.com/steipete/CodexBar/issues/12).
+Wondering if MyAgentsBar scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, local JSONL logs) when the related features are enabled. See the discussion and audit notes in [issue #12](https://github.com/steipete/MyAgentsBar/issues/12).
 
 ## macOS permissions (why they’re needed)
 - **Full Disk Access (optional)**: only required to read Safari cookies/local storage for web-based providers (Codex web, Claude web, Cursor, Droid/Factory). If you don’t grant it, use Chrome/Firefox cookies or CLI-only sources instead.
@@ -78,15 +78,15 @@ Wondering if CodexBar scans your disk? It doesn’t crawl your filesystem; it re
   - z.ai API token is stored in Keychain from Preferences → Providers; Copilot stores its API token in Keychain during device flow.
   - **How do I prevent those keychain alerts?**
     - Open **Keychain Access.app** → login keychain → search the item (e.g., “Claude Code-credentials”).
-    - Open the item → **Access Control** → add `CodexBar.app` under “Always allow access by these applications”.
-    - Prefer adding just CodexBar (avoid “Allow all applications” unless you want it wide open).
-    - Relaunch CodexBar after saving.
+    - Open the item → **Access Control** → add `MyAgentsBar.app` under “Always allow access by these applications”.
+    - Prefer adding just MyAgentsBar (avoid “Allow all applications” unless you want it wide open).
+    - Relaunch MyAgentsBar after saving.
     - Reference screenshot: ![Keychain access control](docs/keychain-allow.png)
   - **How to do the same for the browser?**
     - Find the browser’s “Safe Storage” key (e.g., “Chrome Safe Storage”, “Brave Safe Storage”, “Firefox”, “Microsoft Edge Safe Storage”).
-    - Open the item → **Access Control** → add `CodexBar.app` under “Always allow access by these applications”.
-    - This removes the prompt when CodexBar decrypts cookies for that browser.
-- **Files & Folders prompts (folder/volume access)**: CodexBar launches provider CLIs (codex/claude/gemini/antigravity). If those CLIs read a project directory or external drive, macOS may ask CodexBar for that folder/volume (e.g., Desktop or an external volume). This is driven by the CLI’s working directory, not background disk scanning.
+    - Open the item → **Access Control** → add `MyAgentsBar.app` under “Always allow access by these applications”.
+    - This removes the prompt when MyAgentsBar decrypts cookies for that browser.
+- **Files & Folders prompts (folder/volume access)**: MyAgentsBar launches provider CLIs (codex/claude/gemini/antigravity). If those CLIs read a project directory or external drive, macOS may ask MyAgentsBar for that folder/volume (e.g., Desktop or an external volume). This is driven by the CLI’s working directory, not background disk scanning.
 - **What we do not request**: no Screen Recording, Accessibility, or Automation permissions; no passwords are stored (browser cookies are reused when you opt in).
 
 ## Docs
@@ -110,9 +110,9 @@ Wondering if CodexBar scans your disk? It doesn’t crawl your filesystem; it re
 ## Build from source
 ```bash
 swift build -c release          # or debug for development
-./Scripts/package_app.sh        # builds CodexBar.app in-place
+./Scripts/package_app.sh        # builds MyAgentsBar.app in-place
 CODEXBAR_SIGNING=adhoc ./Scripts/package_app.sh  # ad-hoc signing (no Apple Developer account)
-open CodexBar.app
+open MyAgentsBar.app
 ```
 
 Dev loop:
@@ -126,7 +126,7 @@ Dev loop:
 - 🧿 [oracle](https://askoracle.dev) — Ask the oracle when you're stuck. Invoke GPT-5 Pro with a custom context and files.
 
 ## Looking for a Windows version?
-- [Win-CodexBar](https://github.com/Finesssee/Win-CodexBar)
+- [Win-MyAgentsBar](https://github.com/Finesssee/Win-MyAgentsBar)
 
 ## Credits
 Inspired by [ccusage](https://github.com/ryoppippi/ccusage) (MIT), specifically the cost usage tracking.

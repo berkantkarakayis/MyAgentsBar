@@ -1,4 +1,4 @@
-import CodexBarCore
+import MyAgentsBarCore
 import Testing
 
 @Suite

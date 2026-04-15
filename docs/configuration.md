@@ -1,18 +1,18 @@
 ---
-summary: "CodexBar config file layout for CLI + app settings."
+summary: "MyAgentsBar config file layout for CLI + app settings."
 read_when:
-  - "Editing the CodexBar config file or moving settings off Keychain."
+  - "Editing the MyAgentsBar config file or moving settings off Keychain."
   - "Adding new provider settings fields or defaults."
   - "Explaining CLI/app configuration and security."
 ---
 
 # Configuration
 
-CodexBar reads a single JSON config file for CLI and app settings.
+MyAgentsBar reads a single JSON config file for CLI and app settings.
 Secrets (API keys, cookies, tokens) live here; Keychain is not used.
 
 ## Location
-- `~/.codexbar/config.json`
+- `~/.myagentsbar/config.json`
 - The directory is created if missing.
 - Permissions are forced to `0600` on macOS and Linux.
 
@@ -71,7 +71,7 @@ All provider fields are optional unless noted.
 ```
 
 ## Provider IDs
-Current IDs (see `Sources/CodexBarCore/Providers/Providers.swift`):
+Current IDs (see `Sources/MyAgentsBarCore/Providers/Providers.swift`):
 `codex`, `claude`, `cursor`, `opencode`, `factory`, `gemini`, `antigravity`, `copilot`, `zai`, `minimax`, `kimi`, `kilo`, `kiro`, `vertexai`, `augment`, `jetbrains`, `kimik2`, `amp`, `ollama`, `synthetic`, `warp`, `openrouter`.
 
 ## Ordering
@@ -81,4 +81,4 @@ The order of `providers` controls display/order in the app and CLI. Reorder the 
 - Fields not relevant to a provider are ignored.
 - Omitted providers are appended with defaults during normalization.
 - Keep the file private; it contains secrets.
-- Validate the file with `codexbar config validate` (JSON output available with `--format json`).
+- Validate the file with `myagentsbar config validate` (JSON output available with `--format json`).
