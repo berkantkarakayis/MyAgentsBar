@@ -1,6 +1,7 @@
 import Foundation
 
 struct SettingsDefaultsState {
+    var appThemeRaw: String
     var refreshFrequency: RefreshFrequency
     var launchAtLogin: Bool
     var debugMenuEnabled: Bool

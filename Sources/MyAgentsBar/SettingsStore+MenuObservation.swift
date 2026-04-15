@@ -2,6 +2,7 @@ import Foundation
 
 extension SettingsStore {
     var menuObservationToken: Int {
+        _ = self.appTheme
         _ = self.providerOrder
         _ = self.providerEnablement
         _ = self.refreshFrequency

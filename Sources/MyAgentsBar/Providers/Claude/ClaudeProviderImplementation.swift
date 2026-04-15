@@ -65,7 +65,7 @@ struct ClaudeProviderImplementation: ProviderImplementation {
     @MainActor
     func settingsToggles(context: ProviderSettingsContext) -> [ProviderSettingsToggleDescriptor] {
         let subtitle = if context.settings.debugDisableKeychainAccess {
-            "Inactive while \"Disable Keychain access\" is enabled in Advanced."
+            "Inactive while \"Disable Keychain access\" is enabled."
         } else {
             "Use /usr/bin/security to read Claude credentials and avoid MyAgentsBar keychain prompts."
         }
@@ -138,7 +138,7 @@ struct ClaudeProviderImplementation: ProviderImplementation {
         }
         let keychainPromptPolicySubtitle: () -> String? = {
             if context.settings.debugDisableKeychainAccess {
-                return "Global Keychain access is disabled in Advanced, so this setting is currently inactive."
+                return "Global Keychain access is disabled, so this setting is currently inactive."
             }
             return "Controls Claude OAuth Keychain prompts when the standard reader is active. Choosing " +
                 "\"Never prompt\" can make OAuth unavailable; use Web/CLI when needed."

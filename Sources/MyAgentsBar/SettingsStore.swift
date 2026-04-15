@@ -187,6 +187,10 @@ extension SettingsStore {
     }
 
     private static func loadDefaultsState(userDefaults: UserDefaults) -> SettingsDefaultsState {
+        let appThemeRaw = userDefaults.string(forKey: AppThemeRuntime.userDefaultsKey) ?? AppTheme.systemDefault.rawValue
+        if userDefaults.string(forKey: AppThemeRuntime.userDefaultsKey) == nil {
+            userDefaults.set(appThemeRaw, forKey: AppThemeRuntime.userDefaultsKey)
+        }
         let refreshDefault = userDefaults.string(forKey: "refreshFrequency")
             .flatMap(RefreshFrequency.init(rawValue:))
         let refreshFrequency = refreshDefault ?? .fiveMinutes
@@ -264,6 +268,7 @@ extension SettingsStore {
         let providerDetectionCompleted = userDefaults.object(forKey: "providerDetectionCompleted") as? Bool ?? false
 
         return SettingsDefaultsState(
+            appThemeRaw: appThemeRaw,
             refreshFrequency: refreshFrequency,
             launchAtLogin: launchAtLogin,
             debugMenuEnabled: debugMenuEnabled,

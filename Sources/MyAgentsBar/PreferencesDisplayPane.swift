@@ -17,6 +17,24 @@ struct DisplayPane: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .textCase(.uppercase)
+                    HStack(alignment: .top, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Theme")
+                                .font(.body)
+                            Text("Default keeps the current look. Choose from 8 additional theme palettes.")
+                                .font(.footnote)
+                                .foregroundStyle(.tertiary)
+                        }
+                        Spacer()
+                        Picker("Theme", selection: self.$settings.appTheme) {
+                            ForEach(AppTheme.allCases) { theme in
+                                Text(theme.label).tag(theme)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(maxWidth: 220)
+                    }
                     PreferenceToggleRow(
                         title: "Merge Icons",
                         subtitle: "Use a single menu bar icon with a provider switcher.",

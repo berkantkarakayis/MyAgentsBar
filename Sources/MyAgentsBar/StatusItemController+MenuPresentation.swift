@@ -28,14 +28,14 @@ extension StatusItemController {
 
         let titleField = NSTextField(labelWithString: title)
         titleField.font = NSFont.menuFont(ofSize: NSFont.systemFontSize)
-        titleField.textColor = NSColor.labelColor
+        titleField.textColor = AppThemeRuntime.current.menuPrimaryTextColor
         titleField.lineBreakMode = .byTruncatingTail
         titleField.maximumNumberOfLines = 1
         titleField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         let subtitleField = NSTextField(labelWithString: subtitle)
         subtitleField.font = NSFont.menuFont(ofSize: NSFont.smallSystemFontSize)
-        subtitleField.textColor = NSColor.secondaryLabelColor
+        subtitleField.textColor = AppThemeRuntime.current.menuSecondaryTextColor
         subtitleField.lineBreakMode = .byTruncatingTail
         subtitleField.maximumNumberOfLines = 1
         subtitleField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

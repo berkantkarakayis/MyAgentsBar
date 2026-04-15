@@ -26,10 +26,10 @@ final class ProviderSwitcherView: NSView {
     private var weeklyIndicators: [ObjectIdentifier: WeeklyIndicator] = [:]
     private var hoverTrackingArea: NSTrackingArea?
     private var segmentWidths: [CGFloat] = []
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private var selectedBackground: CGColor { AppThemeRuntime.current.switcherSelectedBackgroundColor.cgColor }
     private let unselectedBackground = NSColor.clear.cgColor
-    private let selectedTextColor = NSColor.white
-    private let unselectedTextColor = NSColor.secondaryLabelColor
+    private var selectedTextColor: NSColor { AppThemeRuntime.current.menuSelectionTextColor }
+    private var unselectedTextColor: NSColor { AppThemeRuntime.current.switcherUnselectedTextColor }
     private let stackedIcons: Bool
     private let rowCount: Int
     private let rowSpacing: CGFloat
@@ -546,14 +546,16 @@ final class ProviderSwitcherView: NSView {
             return
         }
         // The menu card background is very bright in light mode; add a subtle neutral wash to ground the switcher.
-        self.lightModeOverlayLayer.backgroundColor = NSColor.black.withAlphaComponent(0.035).cgColor
+        self.lightModeOverlayLayer.backgroundColor = AppThemeRuntime.current.switcherHoverLightModeColor
+            .withAlphaComponent(0.35)
+            .cgColor
     }
 
     private func hoverPlateColor() -> CGColor {
         if self.isLightMode() {
-            return NSColor.black.withAlphaComponent(0.095).cgColor
+            return AppThemeRuntime.current.switcherHoverLightModeColor.cgColor
         }
-        return NSColor.labelColor.withAlphaComponent(0.06).cgColor
+        return AppThemeRuntime.current.switcherHoverDarkModeColor.cgColor
     }
 
     /// Cache for button width measurements to avoid repeated layout passes.
@@ -732,7 +734,7 @@ final class ProviderSwitcherView: NSView {
 
         let track = NSView()
         track.wantsLayer = true
-        track.layer?.backgroundColor = NSColor.tertiaryLabelColor.withAlphaComponent(0.22).cgColor
+        track.layer?.backgroundColor = AppThemeRuntime.current.menuProgressTrackColor.cgColor
         track.layer?.cornerRadius = 2
         track.layer?.masksToBounds = true
         track.translatesAutoresizingMaskIntoConstraints = false
@@ -799,10 +801,10 @@ final class TokenAccountSwitcherView: NSView {
     private var buttons: [NSButton] = []
     private let rowSpacing: CGFloat = 4
     private let rowHeight: CGFloat = 26
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private var selectedBackground: CGColor { AppThemeRuntime.current.switcherSelectedBackgroundColor.cgColor }
     private let unselectedBackground = NSColor.clear.cgColor
-    private let selectedTextColor = NSColor.white
-    private let unselectedTextColor = NSColor.secondaryLabelColor
+    private var selectedTextColor: NSColor { AppThemeRuntime.current.menuSelectionTextColor }
+    private var unselectedTextColor: NSColor { AppThemeRuntime.current.switcherUnselectedTextColor }
 
     init(accounts: [ProviderTokenAccount], selectedIndex: Int, width: CGFloat, onSelect: @escaping (Int) -> Void) {
         self.accounts = accounts
@@ -903,10 +905,10 @@ final class CodexAccountSwitcherView: NSView {
     private var buttons: [NSButton] = []
     private let rowSpacing: CGFloat = 4
     private let rowHeight: CGFloat = 26
-    private let selectedBackground = NSColor.controlAccentColor.cgColor
+    private var selectedBackground: CGColor { AppThemeRuntime.current.switcherSelectedBackgroundColor.cgColor }
     private let unselectedBackground = NSColor.clear.cgColor
-    private let selectedTextColor = NSColor.white
-    private let unselectedTextColor = NSColor.secondaryLabelColor
+    private var selectedTextColor: NSColor { AppThemeRuntime.current.menuSelectionTextColor }
+    private var unselectedTextColor: NSColor { AppThemeRuntime.current.switcherUnselectedTextColor }
     private let buttonFont = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
     private let buttonHorizontalPadding: CGFloat = 14
     private let buttonSideInset: CGFloat = 6

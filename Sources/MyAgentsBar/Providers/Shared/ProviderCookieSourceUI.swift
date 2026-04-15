@@ -2,7 +2,7 @@ import MyAgentsBarCore
 
 enum ProviderCookieSourceUI {
     static let keychainDisabledPrefix =
-        "Keychain access is disabled in Advanced, so browser cookie import is unavailable."
+        "Keychain access is disabled, so browser cookie import is unavailable."
 
     static func options(allowsOff: Bool, keychainDisabled: Bool) -> [ProviderSettingsPickerOption] {
         var options: [ProviderSettingsPickerOption] = []

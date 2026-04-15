@@ -5,6 +5,14 @@ import ServiceManagement
 extension SettingsStore {
     private static let mergedOverviewSelectionEditedActiveProvidersKey = "mergedOverviewSelectionEditedActiveProviders"
 
+    var appTheme: AppTheme {
+        get { AppTheme(rawValue: self.defaultsState.appThemeRaw) ?? .systemDefault }
+        set {
+            self.defaultsState.appThemeRaw = newValue.rawValue
+            self.userDefaults.set(newValue.rawValue, forKey: AppThemeRuntime.userDefaultsKey)
+        }
+    }
+
     var refreshFrequency: RefreshFrequency {
         get { self.defaultsState.refreshFrequency }
         set {

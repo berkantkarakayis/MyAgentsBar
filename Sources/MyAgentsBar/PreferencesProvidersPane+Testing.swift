@@ -118,11 +118,6 @@ enum ProvidersPaneTestHarness {
 
         settings.claudeCookieSource = .manual
         settings.cursorCookieSource = .manual
-        settings.opencodeCookieSource = .manual
-        settings.opencodegoCookieSource = .manual
-        settings.factoryCookieSource = .manual
-        settings.minimaxCookieSource = .manual
-        settings.augmentCookieSource = .manual
     }
 
     private static func exercisePaneBasics(pane: ProvidersPane) {

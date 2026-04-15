@@ -5,7 +5,6 @@ enum PreferencesTab: String, Hashable {
     case general
     case providers
     case display
-    case advanced
     case about
     case debug
 
@@ -71,10 +70,6 @@ struct PreferencesView: View {
                 .tabItem { Label("Display", systemImage: "eye") }
                 .tag(PreferencesTab.display)
 
-            AdvancedPane(settings: self.settings)
-                .tabItem { Label("Advanced", systemImage: "slider.horizontal.3") }
-                .tag(PreferencesTab.advanced)
-
             AboutPane(updater: self.updater)
                 .tabItem { Label("About", systemImage: "info.circle") }
                 .tag(PreferencesTab.about)
@@ -88,6 +83,8 @@ struct PreferencesView: View {
         .padding(.horizontal, 24)
         .padding(.vertical, 16)
         .frame(width: self.contentWidth, height: self.contentHeight)
+        .tint(self.settings.appTheme.accentColor)
+        .background(self.settings.appTheme.preferencesBackgroundColor)
         .onAppear {
             self.updateLayout(for: self.selection.tab, animate: false)
             self.ensureValidTabSelection()
