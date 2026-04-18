@@ -32,23 +32,25 @@ export function detectMac(): { isMac: boolean; arch: MacArch } {
   return { isMac: true, arch: 'intel' }
 }
 
+const DMG_URL = 'https://github.com/berkantkarakayis/MyAgentsBar/releases/download/v1.0.0/MyAgentsBar.dmg'
+
 export const DOWNLOAD_LINKS = {
   'apple-silicon': {
-    url: 'https://github.com/berkantkarakayis/MyAgentsBar/releases/latest/download/MyAgentsBar-arm64.dmg',
+    url: DMG_URL,
     label: 'Apple Silicon (M1/M2/M3/M4)',
     size: '~6.2 MB',
-    arch: 'arm64',
+    arch: 'macOS',
   },
   intel: {
-    url: 'https://github.com/berkantkarakayis/MyAgentsBar/releases/latest/download/MyAgentsBar-x64.dmg',
+    url: DMG_URL,
     label: 'Intel Mac (x86_64)',
-    size: '~7.1 MB',
-    arch: 'x86_64',
+    size: '~6.2 MB',
+    arch: 'macOS',
   },
   universal: {
-    url: 'https://github.com/berkantkarakayis/MyAgentsBar/releases/latest/download/MyAgentsBar-universal.dmg',
-    label: 'Universal Binary',
-    size: '~12.4 MB',
-    arch: 'universal',
+    url: DMG_URL,
+    label: 'Universal (All Macs)',
+    size: '~6.2 MB',
+    arch: 'macOS',
   },
 }
