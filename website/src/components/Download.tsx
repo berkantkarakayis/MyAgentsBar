@@ -120,6 +120,27 @@ export function Download() {
           </a>
         </motion.div>
 
+        {/* Gatekeeper notice */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-10 mx-auto max-w-lg glass rounded-2xl p-5 border border-amber-500/15"
+          style={{ background: 'rgba(251,191,36,0.04)' }}
+        >
+          <div className="flex items-start gap-3">
+            <span className="text-xl mt-0.5">⚠️</span>
+            <div>
+              <div className="text-sm font-semibold text-amber-400/90 mb-1">İlk açılışta bir adım gerekiyor</div>
+              <p className="text-xs text-white/45 leading-relaxed">
+                Uygulama Apple sertifikası olmadan dağıtıldığı için macOS ilk açılışı engeller.
+                DMG'yi açtıktan sonra uygulamaya <span className="text-white/70 font-medium">sağ-tık → Aç → "Yine de Aç"</span> deyin.
+                Bir kez onayladıktan sonra normal çalışır.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Homebrew option */}
         <motion.div
           initial={{ opacity: 0 }}
